@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30406.217
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiAOD", "SiAOD\SiAOD.csproj", "{CEF81ACF-4199-4FB2-BEE9-54D36EEF81DA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CEF81ACF-4199-4FB2-BEE9-54D36EEF81DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEF81ACF-4199-4FB2-BEE9-54D36EEF81DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEF81ACF-4199-4FB2-BEE9-54D36EEF81DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEF81ACF-4199-4FB2-BEE9-54D36EEF81DA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {32698A14-CE02-4E34-BC3B-B51E9BA05D31}
+	EndGlobalSection
+EndGlobal
