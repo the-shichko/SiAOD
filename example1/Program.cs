@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace example1
@@ -58,10 +59,40 @@ namespace example1
                 },
             };
 
-            students.Where(x => x.Subjects.All(y => y.Mark > 2))
-                .OrderBy(ord => ord.Surname).ToList()
-                .ForEach(x => x.Print());
+            // linq
+            //students.Where(x => x.Subjects.All(y => y.Mark > 2))
+            //    .OrderBy(ord => ord.Surname).ToList()
+            //    .ForEach(x => x.Print());
 
+            Student temp;
+            for (int write = 0; write < students.Count; write++)
+            {
+                for (int sort = 0; sort < students.Count - 1; sort++)
+                {
+                    if (string.Compare(students[sort].Surname, students[sort + 1].Surname) > 0)
+                    {
+                        temp = students[sort + 1];
+                        students[sort + 1] = students[sort];
+                        students[sort] = temp;
+                    }
+                }
+            }
+
+            bool hasBest = true;
+            foreach (var item in students)
+            {
+                foreach (var subject in item.Subjects)
+                {
+                    if (subject.Mark < 3)
+                    {
+                        hasBest = false;
+                        break;
+                    }
+                }
+
+                if (hasBest)
+                    item.Print();
+            }
             Console.Read();
         }
     }
