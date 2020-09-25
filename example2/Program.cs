@@ -13,17 +13,15 @@ namespace example2
 
             var list = new LinkedList<int>();
             
-            list.Add(1);
-            list.Add(2);
-            list.Add(3);
-            list.Add(4);
-            list.Add(5);
-
-
+            list.AddRange(4, 6, 3, 2, 1);
+            list.Sort();
+            Console.WriteLine(list.ToMain());
+            
+            Console.ReadLine();
         }
     }
 
-    public class Node<T>
+    public class Node<T> where T : IComparable
     {
         public Node(T data)
         {
@@ -33,12 +31,12 @@ namespace example2
         public Node<T> Next { get; set; }
     }
 
-    public class LinkedList<T> : IEnumerable<T>
+    public class LinkedList<T> : IEnumerable<T> where T : IComparable
     {
         Node<T> head;
         Node<T> tail;
         int count;
-
+        
         public void Add(T data)
         {
             Node<T> node = new Node<T>(data);
@@ -52,6 +50,13 @@ namespace example2
             count++;
         }
 
+        public void AddRange(params T[] list)
+        {
+            foreach (var data in list)
+            {
+                Add(data);
+            }
+        }
         public void AppendFirst(T data)
         {
             Node<T> node = new Node<T>(data);
@@ -61,7 +66,6 @@ namespace example2
                 tail = head;
             count++;
         }
-
         public bool Remove(T data)
         {
             Node<T> current = head;
@@ -93,7 +97,6 @@ namespace example2
             }
             return false;
         }
-
         public bool Contains(T data)
         {
             Node<T> current = head;
@@ -105,12 +108,10 @@ namespace example2
             }
             return false;
         }
-
         public IEnumerator<T> GetEnumerator()
         {
             return ((IEnumerable<T>)this).GetEnumerator();
         }
-
         IEnumerator IEnumerable.GetEnumerator()
         {
             Node<T> current = head;
@@ -120,5 +121,86 @@ namespace example2
                 current = current.Next;
             }
         }
+        public string ToMain()
+        {
+            var result = this.Aggregate(string.Empty, (current, item) => current + $"{item} -> ");
+            return result.Remove(result.Length - 4);
+        }
+        public void Sort()
+        {
+            Node<T> firstItem;
+            Node<T> secondItem;
+            if (head?.Next == null) return;
+
+            var swap = true;
+
+            while (swap)
+            {
+                swap = false;
+                firstItem = head;
+                while (firstItem.Next != null)
+                {
+                    secondItem = firstItem.Next;
+                    if (firstItem.Data.CompareTo(secondItem.Data) > 0)
+                    {
+                        firstItem.Next = secondItem.Next;
+                        secondItem.Next = firstItem;
+
+                        if (head == secondItem)
+                            head = firstItem;
+
+                        firstItem = secondItem;
+                        swap = true;
+                    }
+
+                    firstItem = firstItem.Next;
+                }
+            }
+        }
+
+        // public void SortDesc()
+        // {
+        //     Node<T> firstItem;
+        //     Node<T> secondItem;
+        //     if (head?.Next == null) return;
+        //
+        //     var swap = true;
+        //
+        //     while (swap)
+        //     {
+        //         swap = false;
+        //         firstItem = head;
+        //         while (firstItem.Next != null)
+        //         {
+        //             secondItem = firstItem.Next;
+        //             if (firstItem.Data.CompareTo(secondItem.Data) < 0)
+        //             {
+        //                 firstItem.Next = secondItem.Next;
+        //
+        //                 if (secondItem.Next != null)
+        //                     secondItem.Next.Previous = firstItem;
+        //
+        //                 secondItem.Next = firstItem;
+        //                 secondItem.Previous = firstItem.Previous;
+        //
+        //                 if (secondItem.Previous != null)
+        //                 {
+        //                     secondItem.Previous.Next = secondItem;
+        //                 }
+        //                 else
+        //                 {
+        //                     head = secondItem;
+        //                 }
+        //
+        //                 firstItem.Previous = secondItem;
+        //
+        //                 firstItem = secondItem;
+        //                 swap = true;
+        //             }
+        //
+        //             firstItem = firstItem.Next;
+        //         }
+        //     }
+        // }
     }
 }

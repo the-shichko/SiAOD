@@ -41,7 +41,7 @@ namespace example1
                     Subjects = new[]
                     {
                         new Subject() { Mark = 8, Name = "Химия" },
-                        new Subject() { Mark = 2, Name = "Физра" },
+                        new Subject() { Mark = 4, Name = "Физра" },
                         new Subject() { Mark = 3, Name = "Матан" },
                     }
                 },
@@ -53,7 +53,7 @@ namespace example1
                     Subjects = new[]
                     {
                         new Subject() { Mark = 5, Name = "Химия" },
-                        new Subject() { Mark = 4, Name = "Физра" },
+                        new Subject() { Mark = 2, Name = "Физра" },
                         new Subject() { Mark = 8, Name = "Матан" },
                     }
                 },
@@ -77,10 +77,11 @@ namespace example1
                     }
                 }
             }
+            
 
-            bool hasBest = true;
             foreach (var item in students)
             {
+                bool hasBest = true;
                 foreach (var subject in item.Subjects)
                 {
                     if (subject.Mark < 3)
