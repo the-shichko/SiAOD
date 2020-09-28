@@ -20,7 +20,7 @@ namespace example3
                 Console.WriteLine("Error n");
                 return;
             }
-
+            
             for (var i = 0; i < n; i++)
             {
                 Console.WriteLine($"First list. {i + 1} elem:");
@@ -59,25 +59,24 @@ namespace example3
         public DoublyNode<T> Previous { get; set; }
         public DoublyNode<T> Next { get; set; }
     }
-
     public class DoublyLinkedList<T> : IEnumerable<T> where T : IComparable
     {
-        DoublyNode<T> head;
-        DoublyNode<T> tail;
+        private DoublyNode<T> _head;
+        private DoublyNode<T> _tail;
 
         public void Add(T data)
         {
             var node = new DoublyNode<T>(data);
 
-            if (head == null)
-                head = node;
+            if (_head == null)
+                _head = node;
             else
             {
-                tail.Next = node;
-                node.Previous = tail;
+                _tail.Next = node;
+                node.Previous = _tail;
             }
 
-            tail = node;
+            _tail = node;
             Count++;
         }
 
@@ -87,15 +86,15 @@ namespace example3
             {
                 var node = new DoublyNode<T>(data);
 
-                if (head == null)
-                    head = node;
+                if (_head == null)
+                    _head = node;
                 else
                 {
-                    tail.Next = node;
-                    node.Previous = tail;
+                    _tail.Next = node;
+                    node.Previous = _tail;
                 }
 
-                tail = node;
+                _tail = node;
                 Count++;
             }
         }
@@ -103,11 +102,11 @@ namespace example3
         public void AddFirst(T data)
         {
             var node = new DoublyNode<T>(data);
-            var temp = head;
+            var temp = _head;
             node.Next = temp;
-            head = node;
+            _head = node;
             if (Count == 0)
-                tail = head;
+                _tail = _head;
             else
                 temp.Previous = node;
             Count++;
@@ -115,7 +114,7 @@ namespace example3
 
         public bool Remove(T data)
         {
-            var current = head;
+            var current = _head;
 
             while (current != null)
             {
@@ -135,7 +134,7 @@ namespace example3
                 }
                 else
                 {
-                    tail = current.Previous;
+                    _tail = current.Previous;
                 }
 
                 if (current.Previous != null)
@@ -144,7 +143,7 @@ namespace example3
                 }
                 else
                 {
-                    head = current.Next;
+                    _head = current.Next;
                 }
 
                 Count--;
@@ -160,14 +159,14 @@ namespace example3
 
         public void Clear()
         {
-            head = null;
-            tail = null;
+            _head = null;
+            _tail = null;
             Count = 0;
         }
 
         public bool Contains(T data)
         {
-            var current = head;
+            var current = _head;
             while (current != null)
             {
                 if (current.Data.Equals(data))
@@ -185,7 +184,7 @@ namespace example3
 
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
-            var current = head;
+            var current = _head;
             while (current != null)
             {
                 yield return current.Data;
@@ -195,7 +194,7 @@ namespace example3
 
         private IEnumerable<T> BackEnumerator()
         {
-            var current = tail;
+            var current = _tail;
             while (current != null)
             {
                 yield return current.Data;
@@ -219,14 +218,14 @@ namespace example3
         {
             DoublyNode<T> firstItem;
             DoublyNode<T> secondItem;
-            if (head?.Next == null) return;
+            if (_head?.Next == null) return;
 
             var swap = true;
 
             while (swap)
             {
                 swap = false;
-                firstItem = head;
+                firstItem = _head;
                 while (firstItem.Next != null)
                 {
                     secondItem = firstItem.Next;
@@ -246,7 +245,7 @@ namespace example3
                         }
                         else
                         {
-                            head = secondItem;
+                            _head = secondItem;
                         }
 
                         firstItem.Previous = secondItem;
@@ -264,14 +263,14 @@ namespace example3
         {
             DoublyNode<T> firstItem;
             DoublyNode<T> secondItem;
-            if (head?.Next == null) return;
+            if (_head?.Next == null) return;
 
             var swap = true;
 
             while (swap)
             {
                 swap = false;
-                firstItem = head;
+                firstItem = _head;
                 while (firstItem.Next != null)
                 {
                     secondItem = firstItem.Next;
@@ -291,7 +290,7 @@ namespace example3
                         }
                         else
                         {
-                            head = secondItem;
+                            _head = secondItem;
                         }
 
                         firstItem.Previous = secondItem;
