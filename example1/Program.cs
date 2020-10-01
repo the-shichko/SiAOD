@@ -31,33 +31,52 @@ namespace example1
     {
         static void Main(string[] args)
         {
-            var students = new List<Student>()
+            // var students = new List<Student>()
+            // {
+            //     new Student()
+            //     {
+            //         Surname = "Шичко",
+            //         BirthPlace = "Место1",
+            //         Year = 2000,
+            //         Subjects = new[]
+            //         {
+            //             new Subject() { Mark = 8, Name = "Химия" },
+            //             new Subject() { Mark = 4, Name = "Физра" },
+            //             new Subject() { Mark = 3, Name = "Матан" },
+            //         }
+            //     },
+            //     new Student()
+            //     {
+            //         Surname = "Зеленко",
+            //         BirthPlace = "Место2",
+            //         Year = 2000,
+            //         Subjects = new[]
+            //         {
+            //             new Subject() { Mark = 5, Name = "Химия" },
+            //             new Subject() { Mark = 2, Name = "Физра" },
+            //             new Subject() { Mark = 8, Name = "Матан" },
+            //         }
+            //     },
+            // };
+
+            var students = new List<Student>();
+            for (var i = 0; i < 3; i++)
             {
-                new Student()
+                var student = new Student();
+                Console.WriteLine("Print: Surname");
+                student.Surname = Console.ReadLine();
+
+                for (var j = 0; j < 3; j++)
                 {
-                    Surname = "Шичко",
-                    BirthPlace = "Место1",
-                    Year = 2000,
-                    Subjects = new[]
+                    Console.WriteLine("Print name of subject:");
+                    student.Subjects[j] = new Subject
                     {
-                        new Subject() { Mark = 8, Name = "Химия" },
-                        new Subject() { Mark = 4, Name = "Физра" },
-                        new Subject() { Mark = 3, Name = "Матан" },
-                    }
-                },
-                new Student()
-                {
-                    Surname = "Зеленко",
-                    BirthPlace = "Место2",
-                    Year = 2000,
-                    Subjects = new[]
-                    {
-                        new Subject() { Mark = 5, Name = "Химия" },
-                        new Subject() { Mark = 2, Name = "Физра" },
-                        new Subject() { Mark = 8, Name = "Матан" },
-                    }
-                },
-            };
+                        Name = Console.ReadLine(),
+                        Mark = int.Parse(Console.ReadLine() ?? "0")
+                    };
+                }
+                students.Add(student);
+            }
 
             // linq
             //students.Where(x => x.Subjects.All(y => y.Mark > 2))
@@ -94,7 +113,8 @@ namespace example1
                 if (hasBest)
                     item.Print();
             }
-            Console.Read();
+            
+            Console.ReadLine();
         }
     }
 }
