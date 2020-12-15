@@ -58,6 +58,7 @@ namespace example2
 
         public T Data { get; set; }
         public Node<T> Next { get; set; }
+
         public static Func<T, T, bool> Greater()
         {
             return (lhs, rhs) => lhs.CompareTo(rhs) > 0;
@@ -87,6 +88,7 @@ namespace example2
             _tail = node;
             _count++;
         }
+
         public void AddRange(params T[] list)
         {
             foreach (var data in list)
@@ -94,6 +96,7 @@ namespace example2
                 Add(data);
             }
         }
+
         public void AppendFirst(T data)
         {
             var node = new Node<T>(data) {Next = _head};
@@ -102,6 +105,7 @@ namespace example2
                 _tail = _head;
             _count++;
         }
+
         public bool Remove(T data)
         {
             var current = _head;
@@ -135,6 +139,7 @@ namespace example2
 
             return false;
         }
+
         public bool Contains(T data)
         {
             var current = _head;
@@ -147,10 +152,12 @@ namespace example2
 
             return false;
         }
+
         IEnumerator IEnumerable.GetEnumerator()
         {
             return ((IEnumerable) this).GetEnumerator();
         }
+
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
             var current = _head;
@@ -160,6 +167,7 @@ namespace example2
                 current = current.Next;
             }
         }
+
         public string ToMain()
         {
             var result = this.Aggregate(string.Empty, (current, item) => current + $"{item} -> ");
@@ -198,6 +206,7 @@ namespace example2
 
             return result;
         }
+
         private static Node<T> MergeSort(Node<T> h, Func<T, T, bool> compare)
         {
             if (h == null || h.Next == null)
@@ -217,6 +226,7 @@ namespace example2
             var sortedlist = SortedMerge(left, right, compare);
             return sortedlist;
         }
+
         private static Node<T> GetMiddle(Node<T> h)
         {
             if (h == null)
