@@ -41,9 +41,9 @@ namespace example5
         static void Main(string[] args)
         {
             var hashTable = new HashTable();
-            Console.WriteLine("Enter 14 array values:");
+            Console.WriteLine("Enter 9 array values:");
             var listOfElements = new List<int>();
-            for (var i = 0; i < 14; i++)
+            for (var i = 0; i < 9; i++)
             {
                 var item = Convert.ToInt32(Console.ReadLine());
                 listOfElements.Add(item);
